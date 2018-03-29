@@ -17,20 +17,21 @@ config_train = "--snapshot " + snapshot_path + "  --freeze-backbone --epochs 13 
 config_debug = "--anchors --annotations "
 
 
-print("------------\n " + data_path)
+print("------------\n " + os.getcwd())
 
 if Debug == True :
-    os.system("cd keras-retinanet-master & " +
-        "cd &"                               +
-       "keras_retinanet\\bin\\debug.py "     +
-        config_debug                         +
-       "pascal " + data_path)
+    os.system("cd .. &"                          +
+        "cd keras-retinanet-master & "           +
+        "cd &"                                   +
+        "python keras_retinanet\\bin\\debug.py " +
+        config_debug                             +
+        "pascal " + data_path)
 
 
 else:
-    os.system("cd .."                        +
-        "cd keras-retinanet-master & "       +
-        "cd &"                              +
-        "python keras_retinanet\\bin\\train.py "    +
-        config_train                         +
+    os.system("cd .. &"                          +
+        "cd keras-retinanet-master & "           +
+        "cd &"                                   +
+        "python keras_retinanet\\bin\\train.py " +
+        config_train                             +
         "pascal " + data_path)
