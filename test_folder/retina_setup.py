@@ -1,6 +1,6 @@
 import os as os
 
-opt = False
+Debug = False
 
 # Directory where the desired snapshot is stored.
 # os.path.abspath... Creates the path from the parent folder to where this file is stored.
@@ -16,7 +16,7 @@ config_train = "--snapshot " + snapshot_path + "  --freeze-backbone --epochs 13 
 # Arguments to pass along the debug.py file. Has the same parameter as the above Str.
 config_debug = "--anchors --annotations "
 
-if opt = True:
+if Debug = True:
     os.system("cd keras-retinanet-master & " +
         "cd &"                               +
        "keras_retinanet\\bin\\debug.py "     +
