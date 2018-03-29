@@ -37,7 +37,7 @@ keras.backend.tensorflow_backend.set_session(get_session())
 
 # adjust this to point to your downloaded/trained model
 # model_path = os.path.join('..','keras-retinanet-master', 'snapshots', 'resnet50_pascal_02.h5')
-model_path = os.path.abspath(os.path.join(os.getcwd(), os.pardir)) + "/keras-retinanet-master/snapshots/resnet50_pascal_07.h5"
+model_path = os.path.abspath(os.path.join(os.getcwd(), os.pardir)) + "/keras-retinanet-master/snapshots/resnet50_pascal_01.h5"
 
 # load retinanet model
 model = keras.models.load_model(model_path, custom_objects=custom_objects)
@@ -45,30 +45,30 @@ model = keras.models.load_model(model_path, custom_objects=custom_objects)
 
 # load label to names mapping for visualization purposes
 labels_to_names = {
-    'aeroplane'   : 0,
-    'bicycle'     : 1,
-    'bird'        : 2,
-    'boat'        : 3,
-    'bottle'      : 4,
-    'bus'         : 5,
-    'car'         : 6,
-    'cat'         : 7,
-    'chair'       : 8,
-    'cow'         : 9,
-    'diningtable' : 10,
-    'dog'         : 11,
-    'horse'       : 12,
-    'motorbike'   : 13,
-    'person'      : 14,
-    'pottedplant' : 15,
-    'sheep'       : 16,
-    'sofa'        : 17,
-    'train'       : 18,
-    'tvmonitor'   : 19
+    0 :     'aeroplane'   ,
+    1 :     'bicycle'     ,
+    2 :     'bird'        ,
+    3 :     'boat'        ,
+    4 :     'bottle'      ,
+    5 :     'bus'         ,
+    6 :     'car'         ,
+    7 :     'cat'         ,
+    8 :     'chair'       ,
+    9 :     'cow'         ,
+    10 :    'diningtable' ,
+    11 :    'dog'         ,
+    12 :    'horse'       ,
+    13 :    'motorbike'   ,
+    14 :    'person'      ,
+    15 :    'pottedplant' ,
+    16 :    'sheep'       ,
+    17 :    'sofa'        ,
+    18 :    'train'       ,
+    19 :    'tvmonitor'
 }
 
 # load image
-image = read_image_bgr(os.path.abspath(os.path.join(os.getcwd(), os.pardir)) + '/test_folder/bird2.jpg')
+image = read_image_bgr(os.path.abspath(os.path.join(os.getcwd(), os.pardir)) + '/test_folder/4_ppl.jpg')
 
 # copy to draw on
 draw = image.copy()
@@ -90,12 +90,13 @@ predicted_labels = np.argmax(detections[0, :, 4:], axis=1)
 scores = detections[0, np.arange(detections.shape[1]), 4 + predicted_labels]
 
 
+
 # correct for image scale
 detections[0, :, :4] /= scale
 
 # visualize detections
 for idx, (label, score) in enumerate(zip(predicted_labels, scores)):
-    if score < 0.2 :
+    if score < 0.3 :
         continue
 
     b = detections[0, idx, :4].astype(int)
